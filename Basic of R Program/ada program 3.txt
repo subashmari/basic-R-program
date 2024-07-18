@@ -1,0 +1,146 @@
+package adalab;
+public class Warshall {
+    public static int[][] computeTransitiveClosure(int[][] adjacencyMatrix) {
+        int n = adjacencyMatrix.length;
+        int[][] transitiveClosure = new int[n][n];
+
+        // Initialize the transitive closure matrix with the given adjacency matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                transitiveClosure[i][j] = adjacencyMatrix[i][j];
+            }
+        }
+
+        for (int k = 0; k < n; k++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    transitiveClosure[i][j] = transitiveClosure[i][j] == 1 ||
+                            (transitiveClosure[i][k] == 1 && transitiveClosure[k][j] == 1) ? 1 : 0;
+                }
+            }
+        }
+
+        return transitiveClosure;
+    }
+
+    public static void main(String[] args) {
+        int n = 4; // Number of vertices in the graph
+        int[][] adjacencyMatrix = {
+            {0, 0, 1, 0},
+            {1, 0, 0, 0},
+            {0, 0, 0, 1},
+            {0, 1, 0, 0}
+        };
+
+        int[][] transitiveClosure = computeTransitiveClosure(adjacencyMatrix);
+
+        System.out.println("Transitive Closure of the Directed Graph:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(transitiveClosure[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+}
+}
+
+
+
+
+
+
+
+
+
+program 2
+
+
+
+
+
+package adalab;
+
+import java.util.*;
+
+public class TopologicalSort {
+    public static List<Integer> topologicalSort(int[][] adjacencyMatrix, int n) {
+        int[] inDegree = new int[n];
+        for (int j = 0; j < n; j++) {
+            int sum = 0;
+            for (int i = 0; i < n; i++) {
+                sum += adjacencyMatrix[i][j];
+            }
+            inDegree[j] = sum;
+        }
+
+        List<Integer> solution = new ArrayList<>();
+        int[] stack = new int[n];
+        int top = -1;
+
+        for (int i = 0; i < n; i++) {
+            if (inDegree[i] == 0) {
+                top++;
+                stack[top] = i;
+            }
+        }
+
+        while (top != -1) {
+            int u = stack[top];
+            top--;
+
+            solution.add(u);
+
+            for (int v = 0; v < n; v++) {
+                if (adjacencyMatrix[u][v] == 1) {
+                    inDegree[v]--;
+                    if (inDegree[v] == 0) {
+                        top++;
+                        stack[top] = v;
+                    }
+                }
+            }
+        }
+
+        return solution;
+    }
+
+    public static void main(String[] args) {
+        int n = 6; // Number of vertices in the graph
+        int[][] adjacencyMatrix = {
+            {0, 0, 1, 1, 0, 0},
+            {0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 1, 1},
+            {0, 0, 0, 0, 0, 1},
+            {0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0}
+        };
+
+        List<Integer> topologicalOrder = topologicalSort(adjacencyMatrix, n);
+        System.out.println("Topological Ordering of Vertices:");
+        for (int vertex : topologicalOrder) {
+            System.out.print(vertex + " ");
+        }
+    }
+}
+}}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

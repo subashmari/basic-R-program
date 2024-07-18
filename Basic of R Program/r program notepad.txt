@@ -1,0 +1,33 @@
+
+my_vector <- c(5, 2, 8, 2, 4, 8, 1, 6, 3)
+mean_value <- mean(my_vector)
+print(paste("Mean:", mean_value))
+
+
+
+
+my_vector <- c(5, 2, 8, 2, 4, 8, 1, 6, 3)
+median_value <- median(my_vector)
+print(paste("Median:", median_value))
+
+
+
+my_vector <- c(5, 2, 8, 2, 4, 8, 1, 6, 3)
+mode_value <- unique(my_vector)[which.max(tabulate(match(my_vector, unique(my_vector))))]
+print(paste("Mode:", mode_value))
+
+
+
+my_vector <- c(5, 2, 8, 2, 4, 8, 1, 6, 3)
+sorted_vector <- sort(my_vector)
+mean_value <- mean(sorted_vector)
+print(paste("Mean:", mean_value))
+
+
+
+
+my_vector <- c(5, 2, 8, 1, 4)
+
+my_vector <- c(5, 2, 8, 2, 4, 8, 1, 6, 3)
+trimmed_mean <- mean(my_vector, trim = 0.2)
+print(paste("Trimmed Mean:", trimmed_mean))
